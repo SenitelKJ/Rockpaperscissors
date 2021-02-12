@@ -13,15 +13,85 @@
             let random = Math.floor((Math.random()*3))
 
             if (random == 0) {
-                console.log("rock");
+                return "rock";
             } else if (random == 1) {
-                console.log("paper");
+                return "paper";
             } else if (random == 2) {
-                console.log("scissors");
+                return "scissors";
             }
         }
 
-        computerPlay();
+        function playRound(computerSelection, playerSelection) {
+            console.log(computerSelection)
+            console.log(playerSelection)
+
+            if (computerSelection == "rock" && playerSelection == "rock") {
+                console.log("Player draws with: " + playerSelection);
+            } else if (computerSelection == "rock" && playerSelection == "paper") {
+                console.log("Player wins with: " + playerSelection);
+                ++playerScore
+            } else if (computerSelection == "rock" && playerSelection == "scissors") {
+                console.log("Player loses with: " + playerSelection);
+                ++computerScore
+            }
+
+            if (computerSelection == "paper" && playerSelection == "rock") {
+                console.log("Player loses with: " + playerSelection);
+                ++computerScore
+            } else if (computerSelection == "paper" && playerSelection == "paper") {
+                console.log("Player draws with: " + playerSelection);
+            } else if (computerSelection == "paper" && playerSelection == "scissors") {
+                console.log("Player wins with: " + playerSelection);
+                ++playerScore
+            }
+
+            if (computerSelection == "scissors" && playerSelection == "rock") {
+                console.log("Player wins with: " + playerSelection);
+                ++playerScore
+            } else if (computerSelection == "scissors" && playerSelection == "paper") {
+                console.log("Player loses with: " + playerSelection);
+                ++computerScore
+            } else if (computerSelection == "scissors" && playerSelection == "scissors") {
+                console.log("Player draws with: " + playerSelection);
+            }
+
+        }
+
+
+        function game() {
+
+            playerScore = 0;
+            computerScore = 0;
+
+            for (let i = 0; i < 5; ++i) {
+                const computerSelection = computerPlay();
+                let playerSelection = prompt("Rock, Paper or Scissors?");
+                playerSelection = playerSelection.toLowerCase();
+
+
+                if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors" ) {
+                    playRound(computerSelection, playerSelection)
+                    console.log("Round: " + (i+1));
+                    console.log("Player Score: " + playerScore);
+                    console.log("Computer Score: " + computerScore);
+                    console.log("\n");
+                } else {
+                    alert("Invalid Input");
+                    --i;
+                }
+
+            }
+
+            if (playerScore > computerScore) {
+                console.log("Player WINS with " + playerScore + " points!")
+            } else if (playerScore < computerScore) {
+                console.log("Computer WINS with " + computerScore + " points!")
+            } else {
+                console.log("Player and Computer DRAWS!")
+            }
+        }
+
+        game();
 
     </script>
 
